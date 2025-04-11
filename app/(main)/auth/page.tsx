@@ -1,5 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default async function page() {
   const param = useSearchParams().get("code");
@@ -18,7 +19,7 @@ export default async function page() {
   )
     .then((response) => response.json())
     .then((data) => {
-      return data;
+      return <Suspense>{data}</Suspense>;
     })
     .catch((error) => {
       // Handle any errors
