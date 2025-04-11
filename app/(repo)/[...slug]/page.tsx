@@ -13,7 +13,10 @@ export default async function Repo({
       repo: `${slug[1]}`,
     });
     const api = response.data;
-    return api.id;
+    const login = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
+      Math.random() * 1000
+    )}&allow_signup=true`;
+    return login;
   } else {
     return "Invalid repo format";
   }
