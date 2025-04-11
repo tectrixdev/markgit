@@ -16,7 +16,7 @@ export default async function Repo({
     });
     const api = response.data;
     const login: string = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
-      Math.random() * 1000
+      Math.random() * 10000000000
     )}&allow_signup=true`;
     redirect(login);
     return "loading...";
