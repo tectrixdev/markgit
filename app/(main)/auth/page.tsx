@@ -15,7 +15,9 @@ export default async function page() {
     const data = await response.json();
     const accessToken = data.access_token;
     return accessToken;
+    console.log("success");
   } else {
     return "Error fetching access token";
+    console.log("Error fetching access token");
   }
 }
