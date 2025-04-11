@@ -1,10 +1,10 @@
 "use client";
-import { useSearchParams, redirect } from "next/navigation";
+import GetSearchParams from "@/components/getsearchparams";
 
 export default async function page() {
-  const search = useSearchParams();
-  const param = search.get("code");
-  const fetchurl = `https://github.com/login/oauth/access_token?client_id=Iv23lilTSFxvqmY2Ojft&client_secret=${process.env.client_secret}&code=${param}`;
+  const fetchurl = `https://github.com/login/oauth/access_token?client_id=Iv23lilTSFxvqmY2Ojft&client_secret=${
+    process.env.client_secret
+  }&code=${GetSearchParams("code")}`;
   const response = await fetch(fetchurl, {
     method: "POST",
     headers: {
