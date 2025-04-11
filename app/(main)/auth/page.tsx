@@ -6,7 +6,7 @@ export default async function page() {
   const param = useSearchParams().get("code");
   await fetch(
     `https://github.com/login/oauth/access_token?client_id=Iv23lilTSFxvqmY2Ojft&client_secret=
-        ${process.env.client_secret}&code=${param}`,
+        ${process.env.client_secret}&code=${(<Suspense>{param}</Suspense>)}`,
     {
       method: "POST",
       headers: {
@@ -19,7 +19,7 @@ export default async function page() {
   )
     .then((response) => response.json())
     .then((data) => {
-      return <Suspense>{data}</Suspense>;
+      return data;
     })
     .catch((error) => {
       // Handle any errors
