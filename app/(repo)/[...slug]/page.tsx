@@ -1,4 +1,6 @@
 import { Octokit, App } from "octokit";
+import { Redirect } from "next";
+import { redirect } from "next/navigation";
 
 export default async function Repo({
   params,
@@ -13,10 +15,11 @@ export default async function Repo({
       repo: `${slug[1]}`,
     });
     const api = response.data;
-    const login = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
+    const login: string = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
       Math.random() * 1000
     )}&allow_signup=true`;
-    return login;
+    redirect(login);
+    return "loading...";
   } else {
     return "Invalid repo format";
   }
