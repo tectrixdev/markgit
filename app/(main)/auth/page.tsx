@@ -1,12 +1,10 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+"use server";
+import param from "@/components/codeparam";
 
 export default async function page() {
-  const param = useSearchParams().get("code");
   await fetch(
     `https://github.com/login/oauth/access_token?client_id=Iv23lilTSFxvqmY2Ojft&client_secret=
-        ${process.env.client_secret}&code=${(<Suspense>{param}</Suspense>)}`,
+        ${process.env.client_secret}&code=${param}`,
     {
       method: "POST",
       headers: {
