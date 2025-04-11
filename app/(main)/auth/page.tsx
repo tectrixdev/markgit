@@ -1,10 +1,10 @@
 "use server";
-import param from "@/components/codeparam";
+import Getcode from "@/components/codeparam";
 
 export default async function page() {
   await fetch(
     `https://github.com/login/oauth/access_token?client_id=Iv23lilTSFxvqmY2Ojft&client_secret=
-        ${process.env.client_secret}&code=${param}`,
+        ${process.env.client_secret}&code=${Getcode}`,
     {
       method: "POST",
       headers: {
