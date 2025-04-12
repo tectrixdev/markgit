@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@octokit/app": "^15.1.6",
     "@octokit/auth-oauth-user": "^5.1.4",
     "next": "15.3.0",
     "octokit": "^4.1.3",

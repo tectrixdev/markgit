@@ -23,6 +23,7 @@ export default async function Repo({
       const api = JSON.stringify(response.data);
       return api;
     } catch (error) {
+      console.error(error);
       return (
         <>
           <p>authentication failed, return to </p>
