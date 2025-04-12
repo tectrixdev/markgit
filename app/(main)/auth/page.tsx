@@ -59,7 +59,7 @@ export default async function Page({
       // error.status; // 500
       // error.request; // { method, url, headers, body }
       // error.response; // { url, status, headers, data }
-      if (error.response.data.error == "bad_verification_code") {
+      if (error.response.data.error! == "bad_verification_code") {
         login();
       }
       return (
