@@ -2,6 +2,7 @@
 //example:  ?code=df34d235b3224a59e786
 import { createOAuthUserAuth } from "@octokit/auth-oauth-user";
 import { Octokit } from "octokit";
+import { redirect } from "next/navigation";
 
 export default async function Page({
   params,
@@ -12,6 +13,12 @@ export default async function Page({
 }) {
   const code = (await searchParams).code;
   const state = (await searchParams).state;
+  if (!code) {
+    const login: string = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
+      Math.random() * 10000000000
+    )}&allow_signup=true`;
+    redirect(login);
+  }
   const auth = createOAuthUserAuth({
     clientId: "Iv23lilTSFxvqmY2Ojft",
     clientSecret: `${process.env.GITHUB_SECRET}`,
