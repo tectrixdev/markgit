@@ -15,7 +15,7 @@ export default async function Page({
   const cookieJar = await cookies();
   const code = (await searchParams).code;
   const state = (await searchParams).state;
-  if (!cookieJar.get("token")) {
+  if (!code) {
     const login: string = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
       Math.random() * 10000000000
     )}&allow_signup=true`;
