@@ -1,5 +1,4 @@
 import { Octokit, App } from "octokit";
-import { Redirect } from "next";
 import { redirect } from "next/navigation";
 
 export default async function Repo({
