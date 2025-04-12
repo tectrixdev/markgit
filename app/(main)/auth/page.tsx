@@ -53,10 +53,20 @@ export default async function Page({
     const files = repo.data.length;
     return (
       <p>
-        authentication successful, {installationUrl} {login} {public_repos}{" "}
-        {response} {files}{" "}
+        authentication successful,
         {repo.data.map((item) => (
-          <p key={item.name}>{item.path}</p>
+          <div
+            style={{
+              background: `black`,
+              padding: `10px`,
+              marginTop: `10px`,
+              borderRadius: `10px`,
+              textAlign: `center`,
+            }}
+            key={item.name}
+          >
+            {item.type == "dir" ? item.path + "/" : item.path}
+          </div>
         ))}
       </p>
     );
