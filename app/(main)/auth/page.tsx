@@ -3,6 +3,7 @@
 import { createOAuthUserAuth } from "@octokit/auth-oauth-user";
 import login from "@/components/login";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Page({
   params,
@@ -13,8 +14,9 @@ export default async function Page({
 }) {
   const code = (await searchParams).code;
   const state = (await searchParams).state;
+  const repo = (await searchParams).repo;
   if (!code) {
-    login();
+    login(repo);
   }
   const auth = createOAuthUserAuth({
     clientId: "Iv23lilTSFxvqmY2Ojft",
@@ -27,6 +29,9 @@ export default async function Page({
     // Exchanges the code for the user access token authentication on first call
     // and caches the authentication for successive calls
     const { token } = await auth();
+    if (!repo) {
+      redirect(`/${repo}`);
+    }
     return <p>authentication successful</p>;
   } catch (error) {
     return (

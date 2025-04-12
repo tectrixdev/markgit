@@ -23,7 +23,9 @@ export default async function Repo({
       return (
         <>
           <p>authentication failed, return to </p>
-          <Link href="/auth">authentication page</Link>
+          <Link href={`/auth?repo=${slug[0] + "/" + slug[1]}`}>
+            authentication page
+          </Link>
           <p>to continue</p>
         </>
       );
