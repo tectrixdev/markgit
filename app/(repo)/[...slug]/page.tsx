@@ -1,6 +1,5 @@
 "use server";
 import { Octokit, App } from "octokit";
-import getCookie from "@/components/getcookies";
 import Link from "next/link";
 
 export default async function Repo({
@@ -8,7 +7,6 @@ export default async function Repo({
 }: {
   params: Promise<{ slug: string[] }>;
 }) {
-  const token = getCookie("token");
   const { slug } = await params;
   if (slug.length == 2) {
     try {
