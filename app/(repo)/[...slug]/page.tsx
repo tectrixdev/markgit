@@ -1,27 +1,35 @@
 "use server";
 import { Octokit, App } from "octokit";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import getCookie from "@/components/getcookies";
+import Link from "next/link";
 
 export default async function Repo({
   params,
 }: {
   params: Promise<{ slug: string[] }>;
 }) {
-  const cookieJar = await cookies();
+  const token = getCookie("token");
   const { slug } = await params;
-  if (!cookieJar.get("token")) {
-    redirect("/auth");
-  }
   if (slug.length == 2) {
-    const octokit = new Octokit({
-      auth: cookieJar.get("token"),
-    });
-    const response = await octokit.request("GET /repos/{owner}/{repo}/", {
-      owner: `${slug[0]}`,
-      repo: `${slug[1]}`,
-    });
-    const api = JSON.parse(response.data);
-    return api;
+    try {
+      const octokit = new Octokit({
+        auth: token,
+      });
+      const response = await octokit.request("GET /repos/{owner}/{repo}/", {
+        owner: `${slug[0]}`,
+        repo: `${slug[1]}`,
+      });
+      const api = JSON.stringify(response.data);
+      return api;
+    } catch (error: any) {
+      return (
+        <>
+          <p>{error}</p>
+          <p>authentication failed, return to </p>
+          <Link href="/auth">authentication page</Link>
+          <p>to continue</p>
+        </>
+      );
+    }
   }
 }
