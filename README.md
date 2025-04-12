@@ -1,2 +1,3 @@
 # in development
-## current state: **fucked**, don't use it's a zip bomb in this state for some reason
+
+## current state: authentication seems to work but I won't blindly trust it without reading the source code.
