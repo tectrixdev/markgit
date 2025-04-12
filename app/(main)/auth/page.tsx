@@ -14,9 +14,8 @@ export default async function Page({
 }) {
   const code = (await searchParams).code;
   const state = (await searchParams).state;
-  const repo = (await searchParams).repo;
   if (!code) {
-    login(repo);
+    login();
   }
   const auth = createOAuthUserAuth({
     clientId: "Iv23lilTSFxvqmY2Ojft",
@@ -29,9 +28,6 @@ export default async function Page({
     // Exchanges the code for the user access token authentication on first call
     // and caches the authentication for successive calls
     const { token } = await auth();
-    if (!repo) {
-      redirect(`/${repo}&token=${token}`);
-    }
     return <p>authentication successful</p>;
   } catch (error) {
     return (
