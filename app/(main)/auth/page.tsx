@@ -3,6 +3,7 @@
 import { createOAuthUserAuth } from "@octokit/auth-oauth-user";
 import { Octokit } from "octokit";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 export default async function Page({
   params,
@@ -11,9 +12,10 @@ export default async function Page({
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const cookieJar = await cookies();
   const code = (await searchParams).code;
   const state = (await searchParams).state;
-  if (!code) {
+  if (!cookieJar.get("token")) {
     const login: string = `https://github.com/login/oauth/authorize?client_id=Iv23lilTSFxvqmY2Ojft&state=${Math.floor(
       Math.random() * 10000000000
     )}&allow_signup=true`;
@@ -30,14 +32,8 @@ export default async function Page({
   // Exchanges the code for the user access token authentication on first call
   // and caches the authentication for successive calls
   const { token } = await auth();
-  const octokit = new Octokit({
-    auth: token,
-  });
-  const response = await octokit.request("GET /user", {
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
-  const data = JSON.stringify(response.data);
-  return <p>{data}</p>;
+  const oneHour = 60 * 60 * 1000; // 1 hour in milliseconds
+  const expirationDate = new Date(Date.now() + oneHour);
+  cookieJar.set("token", token, { expires: expirationDate });
+  return <p>authentication succesful</p>;
 }
