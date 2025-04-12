@@ -26,9 +26,11 @@ export default async function Page({
   const octokit = new Octokit({
     auth: token,
   });
-  return await octokit.request("GET /", {
+  const response = await octokit.request("GET /", {
     headers: {
       "X-GitHub-Api-Version": "2022-11-28",
     },
   });
+  const data = JSON.stringify(response.data);
+  return <p>{data}</p>;
 }
