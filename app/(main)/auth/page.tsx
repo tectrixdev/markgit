@@ -45,29 +45,10 @@ export default async function Page({
       data: { id, login, public_repos },
     } = await octokit.rest.users.getAuthenticated();
     console.log("Hello, %s", id);
-    const repo = await octokit.request("GET /repos/{owner}/{repo}/contents", {
-      owner: `${login}`,
-      repo: `markgit`,
-    });
-    const response = JSON.stringify(repo.data);
-    const files = repo.data.length;
     return (
       <p>
-        authentication successful,
-        {repo.data.map((item) => (
-          <div
-            style={{
-              background: `black`,
-              padding: `10px`,
-              marginTop: `10px`,
-              borderRadius: `10px`,
-              textAlign: `center`,
-            }}
-            key={item.name}
-          >
-            {item.type == "dir" ? item.path + "/" : item.path}
-          </div>
-        ))}
+        authentication successful, this does nothing at the moment. logged in
+        as: {login}
       </p>
     );
   } catch (error) {
