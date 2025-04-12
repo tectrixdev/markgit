@@ -30,14 +30,7 @@ export default async function Page({
     const { token } = await auth();
     setCookie("token", token, { maxAge: 3600 });
     return <p>authentication successful</p>;
-  } catch (error: any) {
-    return (
-      <>
-        <p>{error}</p>
-        <p>authentication failed, return to </p>
-        <Link href="/auth">authentication page</Link>
-        <p>to continue</p>
-      </>
-    );
+  } catch (error) {
+    return error;
   }
 }
