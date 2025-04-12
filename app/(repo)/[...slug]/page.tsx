@@ -22,7 +22,13 @@ export default async function Repo({
       const api = JSON.stringify(response.data);
       return api;
     } catch (error) {
-      return error;
+      return (
+        <>
+          <p>authentication failed, return to </p>
+          <Link href="/auth">authentication page</Link>
+          <p>to continue</p>
+        </>
+      );
     }
   }
 }

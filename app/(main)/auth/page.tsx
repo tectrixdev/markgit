@@ -31,6 +31,12 @@ export default async function Page({
     setCookie("token", token, { maxAge: 3600 });
     return <p>authentication successful</p>;
   } catch (error) {
-    return error;
+    return (
+      <>
+        <p>authentication failed, return to </p>
+        <Link href="/auth">authentication page</Link>
+        <p>to continue</p>
+      </>
+    );
   }
 }
