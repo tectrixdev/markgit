@@ -4,9 +4,12 @@ import Link from "next/link";
 
 export default async function Repo({
   params,
+  searchParams,
 }: {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const token = (await searchParams).token;
   const { slug } = await params;
   if (slug.length == 2) {
     try {

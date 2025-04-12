@@ -30,7 +30,7 @@ export default async function Page({
     // and caches the authentication for successive calls
     const { token } = await auth();
     if (!repo) {
-      redirect(`/${repo}`);
+      redirect(`/${repo}&token=${token}`);
     }
     return <p>authentication successful</p>;
   } catch (error) {
